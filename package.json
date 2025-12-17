@@ -1,17 +1,15 @@
 {
   "name": "muscle-render",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "description": "Serveur de rendu image du mannequin musculaire",
+  "main": "server.js",
   "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "postinstall": "npx playwright install chromium"
+  },
   "dependencies": {
-    "express": "^5.2.1",
+    "express": "^4.19.2",
     "playwright": "^1.57.0"
   }
 }
