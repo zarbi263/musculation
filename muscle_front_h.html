@@ -7,7 +7,7 @@
   <style>
     body {
       margin: 0;
-      background: #111; /* fond visible */
+      background: transparent; /* fond visible */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -22,7 +22,7 @@
     /* style de base des muscles */
     .muscle path {
       fill: #444;          /* gris visible par défaut */
-      stroke: #222;
+      stroke: #000000;
       stroke-width: 1;
     }
   </style>
@@ -103,7 +103,7 @@
     if (!isNaN(value)) {
       const alpha = Math.min(1, Math.max(0, value));
       group.querySelectorAll("path").forEach(p => {
-        p.style.fill = `rgba(220, 38, 38, ${alpha})`;
+        p.style.fill = `rgba(90, 175, 80, ${alpha})`;
       });
     }
   });
@@ -111,4 +111,5 @@
 
 </body>
 </html>
+
 
