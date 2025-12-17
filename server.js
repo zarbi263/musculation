@@ -4,27 +4,35 @@ const { chromium } = require("playwright");
 const app = express();
 
 app.get("/render", async (req, res) => {
-  const params = new URLSearchParams(req.query).toString();
+  try {
+    const params = new URLSearchParams(req.query).toString();
 
-  const url =
-    "https://zarbi263.github.io/musculation/muscle_front_h.html?" +
-    params;
+    const url =
+      "https://zarbi263.github.io/musculation/muscle_front_h.html?" +
+      params;
 
-  const browser = await chromium.launch();
-  const page = await browser.newPage({
-    viewport: { width: 800, height: 1200 },
-  });
+    const browser = await chromium.launch({
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    });
 
-  await page.goto(url, { waitUntil: "networkidle" });
+    const page = await browser.newPage({
+      viewport: { width: 800, height: 1200 },
+    });
 
-  const buffer = await page.screenshot({ type: "png" });
+    await page.goto(url, { waitUntil: "networkidle" });
 
-  await browser.close();
+    const buffer = await page.screenshot({ type: "png" });
 
-  res.set("Content-Type", "image/png");
-  res.send(buffer);
+    await browser.close();
+
+    res.set("Content-Type", "image/png");
+    res.send(buffer);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Render error");
+  }
 });
 
 app.listen(3000, () => {
-  console.log("Serveur actif sur http://localhost:3000");
+  console.log("Serveur actif");
 });
